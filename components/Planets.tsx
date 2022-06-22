@@ -7,14 +7,11 @@ import Planet from "./Planet";
 const Planets: FC = () => {
 
     const [ page, setPage ]  = useState(1);
-    const { data, status, isFetching } = useQuery(['planets', page], () => fetchPlanets(page), { keepPreviousData: true})
-
+    const { data, status } = useQuery(['planets', page], () => fetchPlanets(page), { keepPreviousData: true})
 
     return (
         <> 
         <h2>Planets</h2>
-
-        { isFetching && (<>Is Fetching...</>) }
 
         { status === 'error' && (<div>Error fetching data</div>) }
 

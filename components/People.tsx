@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useQuery } from "react-query";
-import { PersonModel } from "../models/person.model";
 import { fetchPeople } from "../utils/api.util";
 import Person from "./Person";
 
@@ -17,9 +16,9 @@ const People: FC = () => {
         { status === 'loading' && (<div>Loading data...</div>) }
         
         { status === 'success' && (
-            data.results.map((person: PersonModel) => 
+        data.results.map((person) => 
             <Person key={person.name} person={person} />)
-            ) 
+        ) 
         }
         
         </>

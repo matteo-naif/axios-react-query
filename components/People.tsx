@@ -1,24 +1,34 @@
-import { FC } from "react";
-import { useQuery } from "react-query";
+import { FC, useEffect, useState } from "react";
+import { PersonModel } from "../models/person.model";
 import { fetchPeople } from "../utils/api.util";
 import Person from "./Person";
 
 
 const People: FC = () => {
 
-    const { data, status } = useQuery('people', fetchPeople)
+    const [ data, setData ] = useState([]);
+    const [isLoading, setIsLoading ] = useState(true);
+
+    useEffect(() => {
+        fetchPeople().then(res => {
+            console.log(res.results);
+            setData(res.results);
+            setIsLoading(false);
+        });
+    }, [])
 
     return (
         <> 
         <h2>People</h2>
-        { status === 'error' && (<div>Error fetching data</div>) }
 
-        { status === 'loading' && (<div>Loading data...</div>) }
-        
-        { status === 'success' && (
-        data.results.map((person) => 
+        { 
+            isLoading && <>Loading...</> 
+        }
+
+        {
+            data &&
+            data.map((person: PersonModel) => 
             <Person key={person.name} person={person} />)
-        ) 
         }
         
         </>

@@ -2,7 +2,6 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ReactNode, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { queryClientConfig } from '../config/query-client.config';
 
 declare module "react-query/types/react/QueryClientProvider" {
@@ -13,14 +12,14 @@ declare module "react-query/types/react/QueryClientProvider" {
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-  const [queryClient] = useState(() => new QueryClient(queryClientConfig));
+  // const [queryClient] = useState(() => new QueryClient(queryClientConfig));
 
   return (
     <>
-    <QueryClientProvider client={queryClient}>
+    {/* <QueryClientProvider client={queryClient}> */}
       <Component {...pageProps} />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+    {/* </QueryClientProvider> */}
     </>
     )
 }
